@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { View, Text } from "react-native";
-
+import rules from "./rules";
 let defaultErrorMessageStyle = {
   color: "white",
 };
@@ -20,7 +20,9 @@ export default class ValidationComponent extends React.PureComponent {
 
   componentDidUpdate(prevProps) {
     if (this.props.component.props.value !== prevProps.component.props.value) {
-      this.setState({ errorMessage: null });
+      if(this.state.errorMessage && this.isValid(rules)) {
+        this.setState({ errorMessage: null });
+      }
     }
   }
 
